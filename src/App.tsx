@@ -1,5 +1,11 @@
+import Jokes from "./pages/Jokes";
+
 function App() {
-  return <div>hello</div>;
+  return (
+    <>
+      <Jokes />
+    </>
+  );
 }
 
 export default App;
