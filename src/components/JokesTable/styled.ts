@@ -10,12 +10,15 @@ export const Table = styled.table`
   width: 80%;
 `;
 
-export const TableHeader = styled.tr`
+export const TableHeader = styled.thead`
   background-color: beige;
   text-align: center;
 `;
 
-export const TableHeaderItem = styled.td`
+export const TableHeaderRow = styled.tr``;
+
+export const TableHeaderItem = styled.th`
   padding: 1rem;
 `;
 
+export const TableBody = styled.tbody``;

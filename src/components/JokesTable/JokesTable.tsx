@@ -1,7 +1,14 @@
 import { useJokesContext } from "../../context/JokesProvider";
 import { useJokesQuery } from "../../queries/useJokesQuery";
 import JokesTableRow from "../JokesTableRow";
-import { Table, TableHeader, TableHeaderItem, TableWrapper } from "./styled";
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderItem,
+  TableHeaderRow,
+  TableWrapper,
+} from "./styled";
 
 const JokesTable = () => {
   const { limit, page } = useJokesContext();
@@ -15,14 +22,18 @@ const JokesTable = () => {
     <TableWrapper>
       <Table>
         <TableHeader>
-          <TableHeaderItem>Title</TableHeaderItem>
-          <TableHeaderItem>Author</TableHeaderItem>
-          <TableHeaderItem>Created Date</TableHeaderItem>
-          <TableHeaderItem>Views</TableHeaderItem>
+          <TableHeaderRow>
+            <TableHeaderItem>Title</TableHeaderItem>
+            <TableHeaderItem>Author</TableHeaderItem>
+            <TableHeaderItem>Created Date</TableHeaderItem>
+            <TableHeaderItem>Views</TableHeaderItem>
+          </TableHeaderRow>
         </TableHeader>
-        {data.map((joke) => (
-          <JokesTableRow joke={joke} />
-        ))}
+        <TableBody>
+          {data.map((joke) => (
+            <JokesTableRow key={joke.id} joke={joke} />
+          ))}
+        </TableBody>
       </Table>
     </TableWrapper>
   );
