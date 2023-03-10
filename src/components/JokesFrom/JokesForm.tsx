@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
+import { UseMutateFunction } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useCreateJokeMutation } from "../../queries/useCreateJokeMutation";
+import { Joke } from "../../api/JokesApi";
 
 type Inputs = {
   title: string;
@@ -10,14 +11,44 @@ type Inputs = {
   views: string;
 };
 
-const JokesForm = () => {
+type Props = {
+  joke?: Joke;
+  mutate: UseMutateFunction<Joke, unknown, Omit<Joke, "id">>;
+};
+
+const defaultJoke = {
+  id: 0,
+  Body: "",
+  Title: "",
+  Views: "",
+  Author: "",
+  CreatedAt: 0,
+};
+
+const formatTimestampToFormDate = (value: number) => {
+  const d = new Date(value);
+  const year = d.getFullYear();
+  const month = d.getMonth() + 1;
+  const date = d.getDate();
+  return `${year}-${month < 10 ? `0${month}` : month}-${
+    date < 10 ? `0${date}` : date
+  }`;
+};
+
+const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-
-  const { mutate } = useCreateJokeMutation();
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: joke.Title,
+      author: joke.Author,
+      body: joke.Body,
+      createdDate: formatTimestampToFormDate(joke.CreatedAt),
+      views: joke.Views,
+    },
+  });
 
   const navigate = useNavigate();
 

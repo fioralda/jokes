@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Joke } from "../../api/JokesApi";
 import { TableRow, TableRowItem, TableRowViewsItem } from "./styled";
 
@@ -45,11 +46,15 @@ type Props = {
 };
 
 const JokesTableRow = ({
-  joke: { Title, Author, CreatedAt, Views },
+  joke: { id, Title, Author, CreatedAt, Views },
 }: Props) => {
+  const navigate = useNavigate();
+
   return (
     <TableRow>
-      <TableRowItem>{Title}</TableRowItem>
+      <TableRowItem onClick={() => navigate(`/joke/${id}`)}>
+        {Title}
+      </TableRowItem>
       <TableRowItem>{Author}</TableRowItem>
       <TableRowItem>{formatDate(CreatedAt)}</TableRowItem>
       <TableRowViewsItem variant={getViewsVariant(+Views)}>
