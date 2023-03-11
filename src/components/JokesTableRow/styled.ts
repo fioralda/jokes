@@ -10,5 +10,5 @@ export const TableRowItem = styled.td`
 `;
 
 export const TableRowViewsItem = styled(TableRowItem)<{ variant: string }>`
-  color: ${({ variant }) => (variant ? variant : "black")};
+  color: ${({ variant, theme }) => (variant ? variant : theme.text)};
 `;
