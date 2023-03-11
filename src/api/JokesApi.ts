@@ -37,3 +37,8 @@ export const updateJokeDetails = async (id: string, joke: Omit<Joke, "id">) => {
   );
   return res.data;
 };
+
+export const deleteJoke = async (id: string) => {
+  const res = await axios.delete(`https://retoolapi.dev/zu9TVE/jokes/${id}`);
+  return res.data;
+};
