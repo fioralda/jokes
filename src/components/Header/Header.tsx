@@ -1,13 +1,26 @@
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Header = () => {
+  const { token, logout } = useAuthContext();
+
   const navigate = useNavigate();
 
   return (
     <div>
-      <button onClick={() => navigate("/new")}>New Joke</button>
+      {token ? (
+        <button onClick={() => navigate("/new")}>New Joke</button>
+      ) : null}
       <button>Mode</button>
-      <button>Logout</button>
+      {token ? (
+        <button
+          onClick={() => {
+            logout();
+          }}
+        >
+          Logout
+        </button>
+      ) : null}
     </div>
   );
 };
