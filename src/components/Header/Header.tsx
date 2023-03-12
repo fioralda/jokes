@@ -34,7 +34,7 @@ const Header = () => {
         {token && location.pathname !== "/" ? (
           <StyledArrow
             src={theme === "light" ? arrow : whiteArrow}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
           />
         ) : null}
       </HeaderLeft>

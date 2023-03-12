@@ -25,4 +25,8 @@ export const StyledSelect = styled.select`
   padding: 0.4rem;
   border-radius: 0.2rem;
   background-color: ${(props) => props.theme.secondary};
+  cursor: pointer;
+  :hover {
+    opacity: 0.8;
+  }
 `;

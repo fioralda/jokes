@@ -8,6 +8,7 @@ import CreateJoke from "./pages/CreateJoke";
 import EditJoke from "./pages/EditJoke";
 import Jokes from "./pages/Jokes";
 import Login from "./pages/Login";
+import NotFound from "./pages/NotFound";
 import { darkTheme, GlobalStyles, lightTheme } from "./styles/global";
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </ThemeProvider>
     </>

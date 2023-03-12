@@ -28,7 +28,6 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   const login = () => {
     localStorage.setItem("token", "token");
     setToken("token");
-    navigate("/");
   };
 
   const logout = () => {

@@ -13,7 +13,7 @@ export const StyledInput = styled.input`
   border: none;
   background-color: ${(props) => props.theme.secondary};
   ::placeholder {
-    color: ${(props) => props.theme.text};
+    color: black;
   }
 `;
 
