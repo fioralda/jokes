@@ -5,6 +5,7 @@ export const lightTheme: DefaultTheme = {
   text: "#121620",
   primary: "#7286D3",
   secondary: "#E5E0FF",
+  peach: "#FFBFA9",
 };
 
 export const darkTheme: DefaultTheme = {
@@ -12,6 +13,7 @@ export const darkTheme: DefaultTheme = {
   text: "#f1f1f1",
   primary: "#37306B",
   secondary: "#827397",
+  peach: "#F49D1A",
 };
 
 export const GlobalStyles = createGlobalStyle`

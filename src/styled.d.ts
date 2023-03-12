@@ -6,5 +6,6 @@ declare module "styled-components" {
     text: string;
     primary: string;
     secondary: string;
+    peach: string;
   }
 }

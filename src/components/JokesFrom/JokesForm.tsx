@@ -2,6 +2,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { UseMutateFunction } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Joke } from "../../api/JokesApi";
+import {
+  StyledButton,
+  StyledForm,
+  StyledInput,
+  StyledTextArea,
+} from "./styled";
 
 type Inputs = {
   title: string;
@@ -70,24 +76,41 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("title", { required: true })} />
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledInput
+        placeholder="Title"
+        {...register("title", { required: true })}
+      />
       {errors.title && <span>This field is required</span>}
 
-      <input {...register("author", { required: true })} />
+      <StyledInput
+        placeholder="Author"
+        type="email"
+        {...register("author", { required: true })}
+      />
       {errors.author && <span>This field is required</span>}
 
-      <textarea {...register("body", { required: true })}></textarea>
+      <StyledTextArea
+        placeholder="Write your joke here..."
+        {...register("body", { required: true })}
+      ></StyledTextArea>
       {errors.body && <span>This field is required</span>}
 
-      <input type="date" {...register("createdDate", { required: true })} />
+      <StyledInput
+        type="date"
+        {...register("createdDate", { required: true })}
+      />
       {errors.createdDate && <span>This field is required</span>}
 
-      <input type="number" {...register("views", { required: true })} />
+      <StyledInput
+        type="number"
+        placeholder="Views"
+        {...register("views", { required: true })}
+      />
       {errors.views && <span>This field is required</span>}
 
-      <input type="submit" />
-    </form>
+      <StyledButton type="submit">Submit</StyledButton>
+    </StyledForm>
   );
 };
 

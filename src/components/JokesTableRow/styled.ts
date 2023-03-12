@@ -8,6 +8,7 @@ export const TableRow = styled.tr`
 
 export const TableRowItem = styled.td`
   padding: 0.5rem;
+  cursor: pointer;
 `;
 
 export const TableRowViewsItem = styled(TableRowItem)<{ variant: string }>`

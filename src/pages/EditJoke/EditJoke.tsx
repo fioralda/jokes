@@ -4,6 +4,8 @@ import JokesForm from "../../components/JokesFrom/JokesForm";
 import { useDeleteJokeMutation } from "../../queries/useDeleteJokeMutation";
 import { useJokesDetailQuery } from "../../queries/useJokesDetailQuery";
 import { useUpdateJokeMutation } from "../../queries/useUpdateJokeMutation";
+import { Title } from "../CreateJoke/styled";
+import { StyledButton, Wrapper } from "./styled";
 
 const EditJoke = () => {
   const { id } = useParams();
@@ -23,10 +25,10 @@ const EditJoke = () => {
   }
 
   return (
-    <>
-      <div>Edit joke{id}</div>
+    <Wrapper>
+      <Title>Edit Joke</Title>
       <JokesForm joke={data} mutate={mutate} />
-      <button
+      <StyledButton
         onClick={() =>
           deleteMutate(id!, {
             onSuccess: () => {
@@ -37,8 +39,8 @@ const EditJoke = () => {
         }
       >
         Delete
-      </button>
-    </>
+      </StyledButton>
+    </Wrapper>
   );
 };
 

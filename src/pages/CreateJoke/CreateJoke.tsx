@@ -1,16 +1,19 @@
 import JokesFrom from "../../components/JokesFrom";
 import { useCreateJokeMutation } from "../../queries/useCreateJokeMutation";
+import { Title, Wrapper } from "./styled";
 
 const CreateJoke = () => {
   const { mutate } = useCreateJokeMutation();
 
   return (
-    <>
-      <div>Create Joke</div>
+    <Wrapper>
+      <div>
+        <Title>Create Joke</Title>
+      </div>
       <div>
         <JokesFrom mutate={mutate} />
       </div>
-    </>
+    </Wrapper>
   );
 };
 
