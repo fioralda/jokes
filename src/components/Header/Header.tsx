@@ -1,6 +1,18 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthProvider/AuthProvider";
 import { useCustomThemeContext } from "../../context/CustomThemeProvider/CustomThemeProvider";
+import {
+  AuthButton,
+  HeaderLeft,
+  HeaderRight,
+  HeaderWrapper,
+  StyledArrow,
+  StyledButton,
+  StyledImage,
+} from "./styled";
+import moon from "../../images/moon.png";
+import sun from "../../images/sun.png";
+import arrow from "../../images/arrow.png";
 
 const Header = () => {
   const { token, logout } = useAuthContext();
@@ -10,29 +22,36 @@ const Header = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      {token && location.pathname === "/" ? (
-        <button onClick={() => navigate("/new")}>New Joke</button>
-      ) : null}
+    <HeaderWrapper>
+      <HeaderLeft>
+        {token && location.pathname === "/" ? (
+          <StyledButton onClick={() => navigate("/new")}>
+            Create Joke
+          </StyledButton>
+        ) : null}
 
-      {token && location.pathname !== "/" ? (
-        <button onClick={() => navigate(-1)}>Back</button>
-      ) : null}
+        {token && location.pathname !== "/" ? (
+          <StyledArrow src={arrow} onClick={() => navigate(-1)} />
+        ) : null}
+      </HeaderLeft>
 
-      <button onClick={() => toggleTheme(theme === "dark" ? "light" : "dark")}>
-        {theme}
-      </button>
+      <HeaderRight>
+        <StyledImage
+          src={theme === "light" ? moon : sun}
+          onClick={() => toggleTheme(theme === "dark" ? "light" : "dark")}
+        />
 
-      {token ? (
-        <button
-          onClick={() => {
-            logout();
-          }}
-        >
-          Logout
-        </button>
-      ) : null}
-    </div>
+        {token ? (
+          <AuthButton
+            onClick={() => {
+              logout();
+            }}
+          >
+            Logout
+          </AuthButton>
+        ) : null}
+      </HeaderRight>
+    </HeaderWrapper>
   );
 };
 

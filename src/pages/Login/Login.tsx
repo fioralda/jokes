@@ -1,19 +1,24 @@
 import { useAuthContext } from "../../context/AuthProvider";
+import { StyledButton, Wrapper } from "./styled";
 
 const Login = () => {
   const { login } = useAuthContext();
 
   return (
-    <div>
-      Please Login
-      <button
-        onClick={() => {
-          login();
-        }}
-      >
-        Login
-      </button>
-    </div>
+    <Wrapper>
+      <div>
+        <h1>Please Login to access Jokes.</h1>
+      </div>
+      <div>
+        <StyledButton
+          onClick={() => {
+            login();
+          }}
+        >
+          Login
+        </StyledButton>
+      </div>
+    </Wrapper>
   );
 };
 

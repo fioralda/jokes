@@ -3,15 +3,31 @@ import styled from "styled-components";
 export const TableWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  padding-top: 5rem;
 `;
 
 export const Table = styled.table`
   width: 80%;
+
+  tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+
+  th:first-child {
+    border-top-left-radius: 10px;
+  }
+
+  th:last-child {
+    border-top-right-radius: 10px;
+  }
+
+  tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }
 `;
 
 export const TableHeader = styled.thead`
-  background-color: beige;
+  background-color: purple;
   text-align: center;
 `;
 
