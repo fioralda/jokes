@@ -31,8 +31,8 @@ const EditJoke = () => {
       <StyledButton
         onClick={() =>
           deleteMutate(id!, {
-            onSuccess: () => {
-              queryClient.invalidateQueries({ queryKey: ["jokes"] });
+            onSuccess: async () => {
+              await queryClient.invalidateQueries({ queryKey: ["jokes"] });
               navigate("/");
             },
           })

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Joke } from "../../api/JokesApi";
+import { formatDateForTable, formatEmailForTable } from "../../constants";
 import { TableRow, TableRowItem, TableRowViewsItem } from "./styled";
 
 const getViewsVariant = (value: number) => {
@@ -18,29 +19,6 @@ const getViewsVariant = (value: number) => {
   return "black";
 };
 
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-
-const formatDate = (date: number) => {
-  const d = new Date(date);
-  const day = d.getDate();
-  const month = d.getMonth();
-  const year = d.getFullYear();
-  return `${day} ${MONTHS[month]} ${year}`;
-};
-
 type Props = {
   joke: Joke;
 };
@@ -55,8 +33,8 @@ const JokesTableRow = ({
       <TableRowItem onClick={() => navigate(`/joke/${id}`)}>
         {Title}
       </TableRowItem>
-      <TableRowItem>{Author}</TableRowItem>
-      <TableRowItem>{formatDate(CreatedAt)}</TableRowItem>
+      <TableRowItem>{formatEmailForTable(Author)}</TableRowItem>
+      <TableRowItem>{formatDateForTable(CreatedAt)}</TableRowItem>
       <TableRowViewsItem variant={getViewsVariant(+Views)}>
         {Views}
       </TableRowViewsItem>

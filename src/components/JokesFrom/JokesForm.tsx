@@ -1,13 +1,15 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { UseMutateFunction } from "@tanstack/react-query";
+import { UseMutateFunction, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { Joke } from "../../api/JokesApi";
 import {
+  FormError,
   StyledButton,
   StyledForm,
   StyledInput,
   StyledTextArea,
 } from "./styled";
+import { emailRegex, formatTimestampToFormDate } from "../../constants";
 
 type Inputs = {
   title: string;
@@ -31,16 +33,6 @@ const defaultJoke = {
   CreatedAt: 0,
 };
 
-const formatTimestampToFormDate = (value: number) => {
-  const d = new Date(value);
-  const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  return `${year}-${month < 10 ? `0${month}` : month}-${
-    date < 10 ? `0${date}` : date
-  }`;
-};
-
 const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
   const {
     register,
@@ -58,6 +50,8 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
 
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     mutate(
       {
@@ -68,7 +62,9 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
         Views: data.views,
       },
       {
-        onSuccess: () => {
+        onSuccess: async () => {
+          await queryClient.invalidateQueries({ queryKey: ["jokes"] });
+          await queryClient.invalidateQueries({ queryKey: ["joke"] });
           navigate("/");
         },
       }
@@ -79,35 +75,41 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <StyledInput
         placeholder="Title"
-        {...register("title", { required: true })}
+        {...register("title", { required: "Title is required" })}
       />
-      {errors.title && <span>This field is required</span>}
+      <FormError>{errors.title?.message}</FormError>
 
       <StyledInput
         placeholder="Author"
         type="email"
-        {...register("author", { required: true })}
+        {...register("author", {
+          required: "Author is required",
+          pattern: {
+            value: emailRegex(),
+            message: "Provide a valid email address",
+          },
+        })}
       />
-      {errors.author && <span>This field is required</span>}
+      <FormError>{errors.author?.message}</FormError>
 
       <StyledTextArea
         placeholder="Write your joke here..."
-        {...register("body", { required: true })}
+        {...register("body", { required: "Joke is required" })}
       ></StyledTextArea>
-      {errors.body && <span>This field is required</span>}
+      <FormError>{errors.body?.message}</FormError>
 
       <StyledInput
         type="date"
-        {...register("createdDate", { required: true })}
+        {...register("createdDate", { required: "Created Date is required" })}
       />
-      {errors.createdDate && <span>This field is required</span>}
+      <FormError>{errors.createdDate?.message}</FormError>
 
       <StyledInput
         type="number"
         placeholder="Views"
-        {...register("views", { required: true })}
+        {...register("views", { required: "Views is required" })}
       />
-      {errors.views && <span>This field is required</span>}
+      <FormError>{errors.views?.message}</FormError>
 
       <StyledButton type="submit">Submit</StyledButton>
     </StyledForm>

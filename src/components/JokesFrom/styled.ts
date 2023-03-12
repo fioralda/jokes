@@ -35,3 +35,8 @@ export const StyledButton = styled.button`
     opacity: 0.8;
   }
 `;
+
+export const FormError = styled.span`
+  color: red;
+  font-size: 0.8rem;
+`;
