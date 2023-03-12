@@ -13,6 +13,7 @@ import {
 import moon from "../../images/moon.png";
 import sun from "../../images/sun.png";
 import arrow from "../../images/arrow.png";
+import whiteArrow from "../../images/arrow-white.png";
 
 const Header = () => {
   const { token, logout } = useAuthContext();
@@ -31,7 +32,10 @@ const Header = () => {
         ) : null}
 
         {token && location.pathname !== "/" ? (
-          <StyledArrow src={arrow} onClick={() => navigate(-1)} />
+          <StyledArrow
+            src={theme === "light" ? arrow : whiteArrow}
+            onClick={() => navigate(-1)}
+          />
         ) : null}
       </HeaderLeft>
 

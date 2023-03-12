@@ -25,19 +25,20 @@ export const StyledButton = styled.button`
   border-radius: 0.5rem;
   border: none;
   color: white;
-  background-color: ${(props) => props.theme.colors.purple};
+  background-color: ${(props) => props.theme.primary};
   cursor: pointer;
   :hover {
-    opacity: 0.6;
+    background-color: ${(props) => props.theme.primary};
+    opacity: 0.8;
   }
 `;
 
 export const AuthButton = styled(StyledButton)`
-  border: 1px solid ${(props) => props.theme.colors.purple};
+  border: 1px solid ${(props) => props.theme.primary};
   color: ${(props) => props.theme.text};
   background-color: transparent;
   :hover {
-    background-color: ${(props) => props.theme.colors.purple};
+    background-color: ${(props) => props.theme.primary};
     color: white;
   }
 `;

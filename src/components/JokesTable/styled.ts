@@ -4,6 +4,7 @@ export const TableWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 5rem;
+  color: black;
 `;
 
 export const Table = styled.table`
@@ -27,7 +28,8 @@ export const Table = styled.table`
 `;
 
 export const TableHeader = styled.thead`
-  background-color: purple;
+  background-color: ${(props) => props.theme.primary};
+  color: white;
   text-align: center;
 `;
 

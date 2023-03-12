@@ -1,25 +1,22 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, DefaultTheme } from "styled-components";
 
-export const lightTheme = {
+export const lightTheme: DefaultTheme = {
   body: "#f1f1f1",
   text: "#121620",
-  colors: {
-    yellow: "#f2d53c",
-    purple: "#7d3cff",
-  },
+  primary: "#7286D3",
+  secondary: "#E5E0FF",
 };
 
-export const darkTheme = {
-  body: "#121620",
+export const darkTheme: DefaultTheme = {
+  body: "#111928",
   text: "#f1f1f1",
-  colors: {
-    yellow: "#f2d53c",
-    purple: "#7d3cff",
-  },
+  primary: "#37306B",
+  secondary: "#827397",
 };
 
 export const GlobalStyles = createGlobalStyle`
   body {
+    font-family: 'Roboto';
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
   }

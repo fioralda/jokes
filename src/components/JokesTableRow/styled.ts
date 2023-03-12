@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const TableRow = styled.tr`
   background-color: lightgrey;
   text-align: start;
+  background-color: ${(props) => props.theme.secondary};
 `;
 
 export const TableRowItem = styled.td`

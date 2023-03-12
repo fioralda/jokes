@@ -14,7 +14,7 @@ export const StyledButton = styled.button`
   border-radius: 0.5rem;
   border: none;
   color: white;
-  background-color: ${(props) => props.theme.colors.purple};
+  background-color: ${(props) => props.theme.primary};
   cursor: pointer;
   :hover {
     opacity: 0.6;
