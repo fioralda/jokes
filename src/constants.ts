@@ -28,6 +28,9 @@ export const MONTHS = [
 
 export const formatDateForTable = (date: number): string => {
   const d = new Date(date);
+  if (isNaN(Date.parse(d.toDateString()))) {
+    return "Invalid date";
+  }
   const day = d.getDate();
   const month = d.getMonth();
   const year = d.getFullYear();

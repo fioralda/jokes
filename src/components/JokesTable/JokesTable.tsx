@@ -2,17 +2,24 @@ import { useJokesContext } from "../../context/JokesProvider";
 import { useJokesQuery } from "../../queries/useJokesQuery";
 import JokesTableRow from "../JokesTableRow";
 import {
+  Loading,
   Table,
-  TableBody,
   TableHeader,
   TableHeaderItem,
-  TableHeaderRow,
   TableWrapper,
 } from "./styled";
 
 const JokesTable = () => {
   const { limit, page } = useJokesContext();
-  const { data, isSuccess } = useJokesQuery(page, limit);
+  const { data, isLoading, isSuccess } = useJokesQuery(page, limit);
+
+  if (isLoading) {
+    return (
+      <TableWrapper>
+        <Loading>Loading...</Loading>
+      </TableWrapper>
+    );
+  }
 
   if (!isSuccess) {
     return null;
@@ -22,18 +29,18 @@ const JokesTable = () => {
     <TableWrapper>
       <Table>
         <TableHeader>
-          <TableHeaderRow>
+          <tr>
             <TableHeaderItem>Title</TableHeaderItem>
             <TableHeaderItem>Author</TableHeaderItem>
             <TableHeaderItem>Created Date</TableHeaderItem>
             <TableHeaderItem>Views</TableHeaderItem>
-          </TableHeaderRow>
+          </tr>
         </TableHeader>
-        <TableBody>
+        <tbody>
           {data.map((joke) => (
             <JokesTableRow key={joke.id} joke={joke} />
           ))}
-        </TableBody>
+        </tbody>
       </Table>
     </TableWrapper>
   );

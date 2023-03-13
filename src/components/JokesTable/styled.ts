@@ -33,10 +33,14 @@ export const TableHeader = styled.thead`
   text-align: center;
 `;
 
-export const TableHeaderRow = styled.tr``;
-
 export const TableHeaderItem = styled.th`
   padding: 1rem;
 `;
 
-export const TableBody = styled.tbody``;
+export const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.text};
+`;

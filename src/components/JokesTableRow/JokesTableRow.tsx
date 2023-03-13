@@ -29,7 +29,7 @@ const JokesTableRow = ({
   const navigate = useNavigate();
 
   return (
-    <TableRow>
+    <TableRow data-testid="jokes-table-row">
       <TableRowItem onClick={() => navigate(`/joke/${id}`)}>
         {Title}
       </TableRowItem>

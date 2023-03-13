@@ -30,7 +30,7 @@ const defaultJoke = {
   Title: "",
   Views: "",
   Author: "",
-  CreatedAt: 0,
+  CreatedAt: new Date().getTime(),
 };
 
 const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
@@ -75,13 +75,15 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
       <StyledInput
         placeholder="Title"
+        data-testid="joke-title"
         {...register("title", { required: "Title is required" })}
       />
-      <FormError>{errors.title?.message}</FormError>
+      <FormError data-testid="form-error">{errors.title?.message}</FormError>
 
       <StyledInput
         placeholder="Author"
         type="email"
+        data-testid="joke-author"
         {...register("author", {
           required: "Author is required",
           pattern: {
@@ -90,26 +92,33 @@ const JokesForm = ({ joke = defaultJoke, mutate }: Props) => {
           },
         })}
       />
-      <FormError>{errors.author?.message}</FormError>
+      <FormError data-testid="form-error">{errors.author?.message}</FormError>
 
       <StyledTextArea
         placeholder="Write your joke here..."
+        data-testid="joke-body"
         {...register("body", { required: "Joke is required" })}
       ></StyledTextArea>
-      <FormError>{errors.body?.message}</FormError>
+      <FormError data-testid="form-error">{errors.body?.message}</FormError>
 
       <StyledInput
         type="date"
-        {...register("createdDate", { required: "Created Date is required" })}
+        data-testid="joke-date"
+        {...register("createdDate", {
+          required: "Created Date is required",
+        })}
       />
-      <FormError>{errors.createdDate?.message}</FormError>
+      <FormError data-testid="form-error">
+        {errors.createdDate?.message}
+      </FormError>
 
       <StyledInput
         type="number"
         placeholder="Views"
+        data-testid="joke-views"
         {...register("views", { required: "Views is required" })}
       />
-      <FormError>{errors.views?.message}</FormError>
+      <FormError data-testid="form-error">{errors.views?.message}</FormError>
 
       <StyledButton type="submit">Submit</StyledButton>
     </StyledForm>
