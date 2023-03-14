@@ -1,40 +1,39 @@
 export const emailRegex = () =>
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/i;
 
-export const formatTimestampToFormDate = (value: number) => {
-  const d = new Date(value);
-  const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  return `${year}-${month < 10 ? `0${month}` : month}-${
-    date < 10 ? `0${date}` : date
-  }`;
+export const formatTimestampToFormDate = (value: number): string => {
+  const date = new Date(value);
+
+  if (isNaN(Date.parse(date.toDateString()))) {
+    return "";
+  }
+
+  const parts = new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  console.log(parts);
+
+  const year = parts.find((p) => p.type === "year")?.value;
+  const month = parts.find((p) => p.type === "month")?.value;
+  const day = parts.find((p) => p.type === "day")?.value;
+
+  return `${year}-${month}-${day}`;
 };
 
-export const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+export const formatDateForTable = (value: number): string => {
+  const date = new Date(value);
 
-export const formatDateForTable = (date: number): string => {
-  const d = new Date(date);
-  if (isNaN(Date.parse(d.toDateString()))) {
+  if (isNaN(Date.parse(date.toDateString()))) {
     return "Invalid date";
   }
-  const day = d.getDate();
-  const month = d.getMonth();
-  const year = d.getFullYear();
-  return `${day} ${MONTHS[month]} ${year}`;
+
+  return new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  }).format(date);
 };
 
 export const formatEmailForTable = (email: string): string => {
